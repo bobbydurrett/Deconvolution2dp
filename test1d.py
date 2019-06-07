@@ -1,3 +1,5 @@
+# Based on https://rosettacode.org/wiki/Deconvolution/1D#R
+
 import numpy
 
 h = [-8,-9,-3,-1,-6,7]
