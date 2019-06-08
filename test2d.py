@@ -78,7 +78,7 @@ def deconv(a, b):
     # Get it's shape so fftn will expand
     # smaller polynomial to fit.
     
-    ashape = numpy.shape(ffta)
+    ashape = numpy.shape(a)
     
     # Convert smaller polynomial with fft
     # using the shape of the larger one

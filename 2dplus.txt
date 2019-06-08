@@ -1,3 +1,14 @@
+=={{header|Python}}==
+
+Tested on all 5 test cases.
+
+Blows up with divide by zero error on 4d deconv(g,f) because
+the fft(f) returns 0 for a sample. This shows the limits of
+doing a deconvolution with fft.
+
+https://math.stackexchange.com/questions/380720/is-deconvolution-simply-division-in-frequency-domain
+
+<lang python>
 """
 
 https://rosettacode.org/wiki/Deconvolution/2D%2B
@@ -128,3 +139,17 @@ print(" ")
 print("deconv(g,f)=")
 
 pprint.pprint(deconv(g,f))
+</lang>
+
+Output:
+
+<pre>
+deconv(g,h)=
+[[[-9.0, 5.0, -8.0], [3.0, 5.0, 1.0]],
+ [[-1.0, -7.0, 2.0], [-5.0, -6.0, 6.0]],
+ [[8.0, 5.0, 8.0], [-2.0, -6.0, -4.0]]]
+ 
+deconv(g,f)=
+[[[-6.0, -8.0, -5.0, 9.0], [-7.0, 9.0, -6.0, -8.0], [2.0, -7.0, 9.0, 8.0]],
+ [[7.0, 4.0, 4.0, -6.0], [9.0, 9.0, 4.0, -4.0], [-3.0, 7.0, -2.0, -3.0]]]
+</pre>

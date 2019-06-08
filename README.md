@@ -39,3 +39,8 @@ so I don't have to manually convert this to
 
 Then it would just be like the 1d case.
 
+Works except can't divide by zero in frequency domain in some
+cases
+
+https://math.stackexchange.com/questions/380720/is-deconvolution-simply-division-in-frequency-domain
+
