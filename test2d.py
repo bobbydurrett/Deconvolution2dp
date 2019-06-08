@@ -82,3 +82,5 @@ def deconv(a, b):
     return cleanc
 
 print(deconv(g,h))
+
+print(deconv(g,f))
