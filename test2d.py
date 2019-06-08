@@ -12,6 +12,7 @@ https://docs.scipy.org/doc/numpy/reference/routines.fft.html
 """
 
 import numpy
+import pprint
 
 h =  [
       [-8, 1, -7, -2, -9, 4], 
@@ -31,6 +32,35 @@ g=   [
       [78, 16, 7, -199, 156, -162, 29, 28, -103, -10], 
       [-62, -89, 69, -61, 66, 193, -61, 71, -8, -30], 
       [48, -6, 21, -9, -150, -22, -56, 32, 85, 25]]
+      
+def trim_zero_empty(x):
+    """
+    
+    Takes a structure that represents an n dimensional example. 
+    For a 2 dimensional example it will be a list of lists.
+    For a 3 dimensional one it will be a list of list of lists.
+    etc.
+    
+    Returns the same structure without trailing zeros in the inner
+    lists and leaves out inner lists with all zeros.
+    
+    """
+    
+    if len(x) > 0:
+        if type(x[0]) != numpy.ndarray:
+            # x is 1d array
+            return list(numpy.trim_zeros(x))
+        else:
+            # x is a multidimentional array
+            new_x = []
+            for l in x:
+               tl = trim_zero_empty(l)
+               if len(tl) > 0:
+                   new_x.append(tl)
+            return new_x
+    else:
+        # x is empty list
+        return x
        
 def deconv(a, b):
     """
@@ -71,16 +101,17 @@ def deconv(a, b):
     
     # Trim zeros and eliminate
     # empty rows of coefficients
-
-    cleanc = []
-
-    for l in trimmedc:
-        newlist = list(numpy.trim_zeros(l))
-        if len(newlist) > 0:
-            cleanc.append(list(numpy.trim_zeros(l)))
-            
+    
+    cleanc = trim_zero_empty(trimmedc)
+                
     return cleanc
+    
+print("deconv(g,h)=")
 
-print(deconv(g,h))
+pprint.pprint(deconv(g,h))
 
-print(deconv(g,f))
+print(" ")
+
+print("deconv(g,f)=")
+
+pprint.pprint(deconv(g,f))
